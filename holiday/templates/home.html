@@ -4,6 +4,21 @@
 
 {% block content %}
 
-    <p>HELLO WERLD</p>
+    <h1>Recent additions</h1>
+
+    {% for song in songs %}
+        {% ifchanged song.album.id %}
+            <div class="album">
+                {% with song.album.artwork as art %}
+                    <img class="cover" src="{{ art.url }}" width="{{ art.width }}" height="{{ art.height }}" alt="">
+                {% endwith %}
+                <h2>{{ song.album.title }}{% if song.album.artist %} — {{ song.album.artist.name }}{% endif %}</h2>
+            </div>
+        {% endifchanged %}
+        <div class="song">
+            {{ song.title }}
+            {% if song.artist != song.album.artist %} — {{ song.artist.name }}{% endif %}
+        </div>
+    {% endfor %}
 
 {% endblock %}

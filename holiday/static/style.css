@@ -1,0 +1,5 @@
+.album img.cover {
+	float: left;
+	max-width: 150px;
+	margin: 0 1em 1em 0;
+}
