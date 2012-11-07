@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block htmltitle %} • {{ super }}{% endblock %}
+
+{% block content %}
+
+	<h1>{{ artist.name }}</h1>
+
+	{% include "songlist.html" %}
+
+{% endblock %}

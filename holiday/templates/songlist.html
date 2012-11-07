@@ -1,0 +1,19 @@
+{% for song in songs %}
+    {% ifchanged song.album.id %}
+        <div class="album">
+            {% with song.album.artwork as art %}
+                {% if art %}
+                <img class="cover" src="{{ art.url }}" width="{{ art.width }}" height="{{ art.height }}" alt="">
+                {% endif %}
+            {% endwith %}
+            <h2>{{ song.album.title }}
+                {% if song.album.artist %} — <a href="{% url artist slug=song.album.artist.slug %}">{{ song.album.artist.name }}</a>{% endif %}
+            </h2>
+        </div>
+    {% endifchanged %}
+    <div class="song">
+        {% if song.track %}{{ song.track }}. {% endif %}
+        {{ song.title }}
+        {% if song.artist != song.album.artist %} — <a href="{% url artist slug=song.artist.slug %}">{{ song.artist.name }}</a>{% endif %}
+    </div>
+{% endfor %}

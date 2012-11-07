@@ -11,4 +11,7 @@ urlpatterns = patterns('',
         context_object_name='songs',
         template_name='home.html',
     ), name='home'),
+    url(r'^artist/(?P<slug>.*)$', views.ArtistView.as_view(
+        template_name='artist.html',
+    ), name='artist'),
 )
