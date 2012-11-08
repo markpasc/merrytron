@@ -45,6 +45,9 @@ class Classic(models.Model):
     def __unicode__(self):
         return self.title
 
+    class Meta:
+        ordering = ('title',)
+
 
 class Song(models.Model):
     title = models.CharField(max_length=200)
