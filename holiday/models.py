@@ -10,6 +10,9 @@ class Artist(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        ordering = ('name',)
+
 
 class Album(models.Model):
     title = models.CharField(max_length=200)
@@ -24,9 +27,15 @@ class Album(models.Model):
             return u"%s — %s" % (self.title, self.artist.name)
         return self.title
 
+    def songs(self):
+        return self.song_set.all().order_by('track')
+
     @property
     def is_compilation(self):
         return self.artist is None
+
+    class Meta:
+        ordering = ('title',)
 
 
 class Song(models.Model):

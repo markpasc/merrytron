@@ -1,5 +1,52 @@
+body {
+	background: url(gingham.png);
+}
+
+.album {
+	clear: left;
+	margin: 2em 0 0;
+	padding: 0;
+}
+
+a {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.song a {
+	font-weight: bold;
+}
+
 .album img.cover {
 	float: left;
 	max-width: 150px;
-	margin: 0 1em 1em 0;
+	margin: 0;
+}
+
+h1, h2 {
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.album-title, .song {
+	margin-left: 150px;
+	padding-left: 1em;
+}
+
+a.buy, a.play {
+	font-size: 0.8em;
+	border-radius: 10px;
+	padding: 2px 8px;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.song table {
+	border-collapse: separate;
+	border-spacing: 0.5em 0;
+}
+
+.song table td.track {
+	text-align: right;
 }

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block htmltitle %}{{ album }} • {{ super }}{% endblock %}
+
+{% block content %}
+
+	{% with album.songs as songs %}
+		{% include "songlist.html" %}
+	{% endwith %}
+
+{% endblock %}

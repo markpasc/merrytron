@@ -22,6 +22,12 @@ admin.site.register(Album, AlbumAdmin)
 
 
 class SongAdmin(admin.ModelAdmin):
-    list_display = ('title', 'artist', 'track', 'album', 'rating', 'added')
+    list_display = ('title', 'artist', 'track', 'album_name', 'rating', 'added')
+
+    def album_name(self, obj):
+        try:
+            return obj.album.title
+        except AttributeError:
+            return
 
 admin.site.register(Song, SongAdmin)

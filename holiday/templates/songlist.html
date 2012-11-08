@@ -1,19 +1,82 @@
 {% for song in songs %}
-    {% ifchanged song.album.id %}
-        <div class="album">
-            {% with song.album.artwork as art %}
-                {% if art %}
-                <img class="cover" src="{{ art.url }}" width="{{ art.width }}" height="{{ art.height }}" alt="">
-                {% endif %}
-            {% endwith %}
-            <h2>{{ song.album.title }}
-                {% if song.album.artist %} — <a href="{% url artist slug=song.album.artist.slug %}">{{ song.album.artist.name }}</a>{% endif %}
-            </h2>
-        </div>
-    {% endifchanged %}
-    <div class="song">
-        {% if song.track %}{{ song.track }}. {% endif %}
-        {{ song.title }}
-        {% if song.artist != song.album.artist %} — <a href="{% url artist slug=song.artist.slug %}">{{ song.artist.name }}</a>{% endif %}
-    </div>
+    {% with song.album as album %}
+        {% ifchanged album.id %}
+
+            {% if not forloop.first %}
+                </table></div>
+            {% endif %}
+
+            <div class="album">
+                {% with album.artwork as art %}
+                    {% if art %}
+                    <a href="{% url album slug=album.slug %}"><img class="cover" src="{{ art.url }}" width="{{ art.width }}" height="{{ art.height }}" alt=""></a>
+                    {% endif %}
+                {% endwith %}
+
+                <div class="album-title">
+                    <h2>
+                        <a href="{% url album slug=album.slug %}">{{ album.title }}</a>
+                        {% if album.artist %} — <a href="{% url artist slug=album.artist.slug %}">{{ album.artist.name }}</a>{% endif %}
+                        {% if album.buy_link %}
+                            <a class="buy" href="{{ album.buy_link }}">
+                                {% if album.price %}
+                                    Buy for {{ album.price }}
+                                {% else %}
+                                    Download
+                                {% endif %}
+                            </a>
+                        {% endif %}
+                    </h2>
+                </div>
+            </div>
+
+            <div class="song"><table>
+
+        {% endifchanged %}
+    {% endwith %}
+
+    <tr>
+        <td class="track">{{ song.track }}</td>
+        <td>
+            {{ song.title }}
+            {% if song.embed %}
+                <a class="play" href="#play-song-{{ song.id }}" role="button" data-toggle="modal">Play</a>
+                <div id="play-song-{{ song.id }}" class="modal hide fade">
+                    {% autoescape off %}
+                    {{ song.embed }}
+                    {% endautoescape %}
+                </div>
+            {% endif %}
+        </td>
+        <td>
+            {% if song.artist != song.album.artist %}
+                <a href="{% url artist slug=song.artist.slug %}">{{ song.artist.name }}</a>
+            {% endif %}
+        </td>
+        <td>
+            {% if song.rating == 1 %}
+                <a href="{% url good %}">★</a>
+            {% elif song.rating == 2 %}
+                <a href="{% url great %}">★★</a>
+            {% elif song.rating == 3 %}
+                <a href="{% url best %}">★★★</a>
+            {% endif %}
+        </td>
+        <td>
+            {% if song.buy_link %}
+                <a class="buy" href="{{ song.buy_link }}">
+                    {% if song.price %}
+                        Buy for {{ song.price }}
+                    {% else %}
+                        Download
+                    {% endif %}
+                </a>
+            {% endif %}
+        </td>
+    </tr>
+
+    {% if forloop.last %}
+        </table></div>
+    {% endif %}
+
 {% endfor %}
