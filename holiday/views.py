@@ -3,7 +3,19 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 
-from holiday.models import Artist, Song
+from holiday.models import Artist, Classic, Song
+
+
+class TitledListView(ListView):
+
+	context_object_name = 'songs'
+	template_name = 'songs.html'
+	title = None
+
+	def get_context_data(self, **kwargs):
+		context = super(TitledListView, self).get_context_data(**kwargs)
+		context['title'] = self.title
+		return context
 
 
 class ArtistView(DetailView):
@@ -15,4 +27,15 @@ class ArtistView(DetailView):
 		context = super(ArtistView, self).get_context_data(**kwargs)
 		query = Q(artist__slug=self.object.slug) | Q(album__artist__slug=self.object.slug)
 		context['songs'] = Song.objects.filter(query).order_by('-added', 'album', 'track')
+		return context
+
+
+class ClassicView(DetailView):
+
+	model = Classic
+	context_object_name = 'classic'
+
+	def get_context_data(self, **kwargs):
+		context = super(ClassicView, self).get_context_data(**kwargs)
+		context['songs'] = self.object.song_set.order_by('-added', 'album', 'track')
 		return context

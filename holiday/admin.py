@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from holiday.models import Artist, Album, Song
+from holiday.models import Artist, Album, Classic, Song
 
 
 class ArtistAdmin(admin.ModelAdmin):
@@ -19,6 +19,15 @@ class AlbumAdmin(admin.ModelAdmin):
     }
 
 admin.site.register(Album, AlbumAdmin)
+
+
+class ClassicAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+    prepopulated_fields = {
+        'slug': ('title',),
+    }
+
+admin.site.register(Classic, ClassicAdmin)
 
 
 class SongAdmin(admin.ModelAdmin):

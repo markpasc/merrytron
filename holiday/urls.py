@@ -12,7 +12,7 @@ urlpatterns = patterns('',
         template_name='home.html',
     ), name='home'),
     url(r'^artist/(?P<slug>.*)$', views.ArtistView.as_view(
-        template_name='artist.html',
+        template_name='songs.html',
     ), name='artist'),
     url(r'^album/(?P<slug>.*)$', DetailView.as_view(
         model=models.Album,
@@ -20,19 +20,20 @@ urlpatterns = patterns('',
         template_name='album.html',
     ), name='album'),
 
-    url(r'^rating/good$', ListView.as_view(
+    url(r'^classic/(?P<slug>.*)$', views.ClassicView.as_view(
+        template_name='songs.html',
+    ), name='classic'),
+
+    url(r'^rating/good$', views.TitledListView.as_view(
         queryset=models.Song.objects.filter(rating=1).select_related('album').order_by('-added', 'album', 'track'),
-        context_object_name='songs',
-        template_name='home.html',
+        title='Rated good',
     ), name='good'),
-    url(r'^rating/great$', ListView.as_view(
+    url(r'^rating/great$', views.TitledListView.as_view(
         queryset=models.Song.objects.filter(rating=2).select_related('album').order_by('-added', 'album', 'track'),
-        context_object_name='songs',
-        template_name='home.html',
+        title='Rated great',
     ), name='great'),
-    url(r'^rating/best$', ListView.as_view(
+    url(r'^rating/best$', views.TitledListView.as_view(
         queryset=models.Song.objects.filter(rating=3).select_related('album').order_by('-added', 'album', 'track'),
-        context_object_name='songs',
-        template_name='home.html',
+        title='Rated best',
     ), name='best'),
 )

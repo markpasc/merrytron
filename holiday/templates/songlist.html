@@ -38,7 +38,12 @@
     <tr>
         <td class="track">{{ song.track }}</td>
         <td>
-            {{ song.title }}
+            {% if song.classic_id %}
+                <a href="{% url classic slug=song.classic.slug %}">{{ song.title }}</a>
+            {% else %}
+                {{ song.title }}
+            {% endif %}
+
             {% if song.embed %}
                 <a class="play" href="#play-song-{{ song.id }}" role="button" data-toggle="modal">Play</a>
                 <div id="play-song-{{ song.id }}" class="modal hide fade">
