@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block htmltitle %} • {{ super }}{% endblock %}
+{% block htmltitle %}{{ artist }} • {{ block.super }}{% endblock %}
 
 {% block content %}
 
-	<h1>{{ artist.name }}</h1>
+	<h2>{{ artist.name }}</h2>
 
 	{% include "songlist.html" %}
 

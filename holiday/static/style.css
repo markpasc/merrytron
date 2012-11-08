@@ -21,9 +21,20 @@ a {
 	float: left;
 	max-width: 150px;
 	margin: 0;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+}
+
+h1 {
+	margin-right: 20px;
 }
 
 h1, h2 {
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+h1, h2, h3 {
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
