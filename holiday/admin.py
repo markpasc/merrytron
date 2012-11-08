@@ -13,10 +13,14 @@ admin.site.register(Artist, ArtistAdmin)
 
 
 class AlbumAdmin(admin.ModelAdmin):
-    list_display = ('title', 'artist')
+    list_display = ('title', 'artist', 'has_artwork')
     prepopulated_fields = {
         'slug': ('title',),
     }
+
+    def has_artwork(self, obj):
+        return bool(obj.artwork)
+    has_artwork.boolean = True
 
 admin.site.register(Album, AlbumAdmin)
 
