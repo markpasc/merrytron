@@ -71,6 +71,11 @@ class Classic(models.Model):
     def __unicode__(self):
         return self.title
 
+    def merge_from(self, other):
+        other_songs = other.song_set.all()
+        other_songs.update(classic=self)
+        other.delete()
+
     class Meta:
         ordering = ('title',)
 
