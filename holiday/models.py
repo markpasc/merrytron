@@ -1,6 +1,9 @@
 # coding=utf-8
 
+from datetime import date
+
 from django.db import models
+from django.template.defaultfilters import slugify
 
 
 class Artist(models.Model):
@@ -29,6 +32,27 @@ class Album(models.Model):
 
     def songs(self):
         return self.song_set.all().order_by('track')
+
+    def add_songs(self, songs, added=None):
+        if added is None:
+            added = date(2010, 10, 31)
+        for song in songs:
+            track, title, artistname, rating, classicname = song
+
+            if artistname is None:
+                artist = self.artist
+            else:
+                artist, _ = Artist.object.get_or_create(name=artistname,
+                    defaults={'slug': slugify(artistname)})
+
+            classic = None
+            if classicname is not None:
+                classic, _ = Classic.objects.get_or_create(slug=slugify(classicname),
+                    defaults={'title': classicname})
+
+            obj = Song(title=title, album=self, artist=artist, track=track, added=added,
+                rating=rating or 0, classic=classic)
+            obj.save()
 
     @property
     def is_compilation(self):
