@@ -8,6 +8,7 @@ class ArtistAdmin(admin.ModelAdmin):
     prepopulated_fields = {
         'slug': ('name',),
     }
+    search_fields = ('name',)
 
 admin.site.register(Artist, ArtistAdmin)
 
@@ -17,6 +18,7 @@ class AlbumAdmin(admin.ModelAdmin):
     prepopulated_fields = {
         'slug': ('title',),
     }
+    search_fields = ('title', 'artist__name')
 
     def has_artwork(self, obj):
         return bool(obj.artwork)
@@ -34,6 +36,7 @@ class ClassicAdmin(admin.ModelAdmin):
     prepopulated_fields = {
         'slug': ('title',),
     }
+    search_fields = ('title',)
 
 admin.site.register(Classic, ClassicAdmin)
 
@@ -41,6 +44,8 @@ admin.site.register(Classic, ClassicAdmin)
 class SongAdmin(admin.ModelAdmin):
     list_display = ('title', 'artist', 'track', 'album_name', 'rating', 'added')
     fields = ('title', 'classic', 'artist', 'album', 'track', 'rating', 'added', 'buy_link', 'price', 'embed')
+    search_fields = ('title', 'artist__name', 'album__title', 'classic__title')
+    list_filter = ('rating', 'added')
 
     def album_name(self, obj):
         try:
