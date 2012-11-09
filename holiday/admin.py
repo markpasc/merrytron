@@ -36,6 +36,7 @@ admin.site.register(Classic, ClassicAdmin)
 
 class SongAdmin(admin.ModelAdmin):
     list_display = ('title', 'artist', 'track', 'album_name', 'rating', 'added')
+    fields = ('title', 'artist', 'album', 'track', 'rating', 'added', 'buy_link', 'price', 'embed')
 
     def album_name(self, obj):
         try:
