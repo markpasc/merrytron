@@ -13,7 +13,7 @@ admin.site.register(Artist, ArtistAdmin)
 
 
 class AlbumAdmin(admin.ModelAdmin):
-    list_display = ('title', 'artist', 'has_artwork')
+    list_display = ('title', 'artist', 'has_artwork', 'has_songs')
     prepopulated_fields = {
         'slug': ('title',),
     }
@@ -22,11 +22,15 @@ class AlbumAdmin(admin.ModelAdmin):
         return bool(obj.artwork)
     has_artwork.boolean = True
 
+    def has_songs(self, obj):
+        return bool(obj.songs())
+    has_songs.boolean = True
+
 admin.site.register(Album, AlbumAdmin)
 
 
 class ClassicAdmin(admin.ModelAdmin):
-    list_display = ('title',)
+    list_display = ('title', 'slug')
     prepopulated_fields = {
         'slug': ('title',),
     }
@@ -36,7 +40,7 @@ admin.site.register(Classic, ClassicAdmin)
 
 class SongAdmin(admin.ModelAdmin):
     list_display = ('title', 'artist', 'track', 'album_name', 'rating', 'added')
-    fields = ('title', 'artist', 'album', 'track', 'rating', 'added', 'buy_link', 'price', 'embed')
+    fields = ('title', 'classic', 'artist', 'album', 'track', 'rating', 'added', 'buy_link', 'price', 'embed')
 
     def album_name(self, obj):
         try:
