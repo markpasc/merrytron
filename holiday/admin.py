@@ -42,10 +42,14 @@ admin.site.register(Classic, ClassicAdmin)
 
 
 class SongAdmin(admin.ModelAdmin):
-    list_display = ('title', 'artist', 'track', 'album_name', 'rating', 'added')
+    list_display = ('title', 'artist', 'track', 'album_name', 'rating', 'added', 'has_embed')
     fields = ('title', 'classic', 'artist', 'album', 'track', 'rating', 'added', 'buy_link', 'price', 'embed')
     search_fields = ('title', 'artist__name', 'album__title', 'classic__title')
     list_filter = ('rating', 'added')
+
+    def has_embed(self, obj):
+        return bool(obj.embed)
+    has_embed.boolean = True
 
     def album_name(self, obj):
         try:
