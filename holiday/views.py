@@ -68,6 +68,18 @@ class CanPlayView(TitledListView):
         return qs.select_related('album').order_by('album__artist__name', 'album__title', 'track')
 
 
+class DownloadView(TitledListView):
+
+    title = 'Free downloads'
+
+    def get_queryset(self):
+        song_query = Q(price='') & ~Q(buy_link='')
+        album_query = Q(album__price='') & ~Q(album__buy_link='')
+        query = song_query | album_query
+        qs = Song.objects.filter(query)
+        return qs.select_related('album').order_by('album__artist__name', 'album__title', 'track')
+
+
 class RatedView(ListView):
 
     paginate_by = 40

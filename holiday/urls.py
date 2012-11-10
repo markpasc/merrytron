@@ -13,7 +13,7 @@ urlpatterns = patterns('',
 
     url(r'^classic/(?P<slug>.*)$', views.ClassicView.as_view(), name='classic'),
     url(r'^playable/(?:page(?P<page>\d+))?$', views.CanPlayView.as_view(), name='can_play'),
-    # free downloads
+    url(r'^downloads/(?:page(?P<page>\d+))?$', views.DownloadView.as_view(), name='download'),
     # genre?
 
     url(r'^rated/(?P<rated>unrated|good|great|best)/(?:page(?P<page>\d+))?$',
