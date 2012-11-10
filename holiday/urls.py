@@ -9,8 +9,12 @@ urlpatterns = patterns('',
     url(r'^(?:page(?P<page>\d+))?$', views.HomeView.as_view(), name='home'),
     url(r'^artist/(?P<slug>.*)$', views.ArtistView.as_view(), name='artist'),
     url(r'^album/(?P<slug>.*)$', views.AlbumView.as_view(), name='album'),
+    # everything
 
     url(r'^classic/(?P<slug>.*)$', views.ClassicView.as_view(), name='classic'),
+    # has embed
+    # free downloads
+    # genre?
 
     url(r'^rating/good$', views.TitledListView.as_view(
         queryset=models.Song.objects.filter(rating=1).select_related('album').order_by('-added', 'album', 'track'),
