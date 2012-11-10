@@ -67,6 +67,7 @@ a.buy, a.play {
 	font-size: 1.2em;
 	text-align: center;
 	margin: 2em 0;
+	clear: left;
 }
 
 #pages .left span:before {
