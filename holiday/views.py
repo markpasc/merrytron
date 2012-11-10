@@ -59,20 +59,13 @@ class ClassicView(DetailView):
         return context
 
 
-class CanPlayView(ListView):
+class CanPlayView(TitledListView):
 
-    paginate_by = 40
-    context_object_name = 'songs'
-    template_name = 'songs.html'
+    title = 'Playable'
 
     def get_queryset(self):
         qs = Song.objects.exclude(embed='')
         return qs.select_related('album').order_by('album__artist__name', 'album__title', 'track')
-
-    def get_context_data(self, **kwargs):
-        context = super(CanPlayView, self).get_context_data(**kwargs)
-        context['title'] = 'Playable'
-        return context
 
 
 class RatedView(ListView):
