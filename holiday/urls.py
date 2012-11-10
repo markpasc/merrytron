@@ -6,23 +6,11 @@ from holiday import models
 
 
 urlpatterns = patterns('',
-    url(r'^$', ListView.as_view(
-        queryset=models.Song.objects.select_related('album').order_by('-added', 'album', 'track')[:40],
-        context_object_name='songs',
-        template_name='home.html',
-    ), name='home'),
-    url(r'^artist/(?P<slug>.*)$', views.ArtistView.as_view(
-        template_name='songs.html',
-    ), name='artist'),
-    url(r'^album/(?P<slug>.*)$', DetailView.as_view(
-        model=models.Album,
-        context_object_name='album',
-        template_name='album.html',
-    ), name='album'),
+    url(r'^(?:page(?P<page>\d+))?$', views.HomeView.as_view(), name='home'),
+    url(r'^artist/(?P<slug>.*)$', views.ArtistView.as_view(), name='artist'),
+    url(r'^album/(?P<slug>.*)$', views.AlbumView.as_view(), name='album'),
 
-    url(r'^classic/(?P<slug>.*)$', views.ClassicView.as_view(
-        template_name='songs.html',
-    ), name='classic'),
+    url(r'^classic/(?P<slug>.*)$', views.ClassicView.as_view(), name='classic'),
 
     url(r'^rating/good$', views.TitledListView.as_view(
         queryset=models.Song.objects.filter(rating=1).select_related('album').order_by('-added', 'album', 'track'),

@@ -62,3 +62,26 @@ a.buy, a.play {
 .song table td.track {
 	text-align: right;
 }
+
+#pages {
+	font-size: 1.2em;
+	text-align: center;
+	margin: 2em 0;
+}
+
+#pages .left span:before {
+	display: inline-block;
+	content: "➤";
+	padding-left: 0.5em;
+	transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+}
+
+#pages .right span:after {
+	display: inline-block;
+	content: "➤";
+	padding-left: 0.5em;
+}

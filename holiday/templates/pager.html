@@ -1,0 +1,13 @@
+{% if page_obj %}
+	<div id="pages">
+		{% if page_obj.has_previous %}
+			<a class="left" href="page{{ page_obj.previous_page_number }}"><span>Back</span></a>
+			{% if page_obj.has_next %}
+				&bull;
+			{% endif %}
+		{% endif %}
+		{% if page_obj.has_next %}
+			<a class="right" href="page{{ page_obj.next_page_number }}"><span>More</span></a>
+		{% endif %}
+	</div>
+{% endif %}

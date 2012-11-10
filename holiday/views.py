@@ -3,11 +3,12 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 
-from holiday.models import Artist, Classic, Song
+from holiday.models import Artist, Album, Classic, Song
 
 
 class TitledListView(ListView):
 
+	paginate_by = 40
 	context_object_name = 'songs'
 	template_name = 'songs.html'
 	title = None
@@ -18,10 +19,19 @@ class TitledListView(ListView):
 		return context
 
 
+class HomeView(ListView):
+
+    queryset = Song.objects.select_related('album').order_by('-added', 'album', 'track')
+    paginate_by = 40
+    context_object_name = 'songs'
+    template_name = 'home.html'
+
+
 class ArtistView(DetailView):
 
 	model = Artist
 	context_object_name = 'artist'
+	template_name = 'songs.html'
 
 	def get_context_data(self, **kwargs):
 		context = super(ArtistView, self).get_context_data(**kwargs)
@@ -30,10 +40,19 @@ class ArtistView(DetailView):
 		return context
 
 
+class AlbumView(DetailView):
+
+    model = Album
+    context_object_name = 'album'
+    template_name = 'album.html'
+
+
+
 class ClassicView(DetailView):
 
 	model = Classic
 	context_object_name = 'classic'
+	template_name = 'songs.html'
 
 	def get_context_data(self, **kwargs):
 		context = super(ClassicView, self).get_context_data(**kwargs)
