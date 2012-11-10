@@ -16,16 +16,6 @@ urlpatterns = patterns('',
     # free downloads
     # genre?
 
-    url(r'^rating/good$', views.TitledListView.as_view(
-        queryset=models.Song.objects.filter(rating=1).select_related('album').order_by('-added', 'album', 'track'),
-        title='Rated good',
-    ), name='good'),
-    url(r'^rating/great$', views.TitledListView.as_view(
-        queryset=models.Song.objects.filter(rating=2).select_related('album').order_by('-added', 'album', 'track'),
-        title='Rated great',
-    ), name='great'),
-    url(r'^rating/best$', views.TitledListView.as_view(
-        queryset=models.Song.objects.filter(rating=3).select_related('album').order_by('-added', 'album', 'track'),
-        title='Rated best',
-    ), name='best'),
+    url(r'^rated/(?P<rated>unrated|good|great|best)/(?:page(?P<page>\d+))?$',
+        views.RatedView.as_view(), name='rated'),
 )

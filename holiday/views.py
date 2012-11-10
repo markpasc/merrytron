@@ -57,3 +57,24 @@ class ClassicView(DetailView):
         context = super(ClassicView, self).get_context_data(**kwargs)
         context['songs'] = self.object.song_set.order_by('-added', 'album', 'track')
         return context
+
+
+class RatedView(ListView):
+
+    paginate_by = 40
+    context_object_name = 'songs'
+    template_name = 'songs.html'
+
+    RATINGS = ('unrated', 'good', 'great', 'best')
+
+    def get_queryset(self):
+        rated = self.kwargs['rated']
+        rating = self.RATINGS.index(rated)
+        qs = Song.objects.filter(rating=rating)
+        return qs.select_related('album').order_by('album__artist__name', 'album__title', 'track')
+
+    def get_context_data(self, **kwargs):
+        context = super(RatedView, self).get_context_data(**kwargs)
+        rated = self.kwargs['rated']
+        context['title'] = u"Rated %s" % rated if self.RATINGS.index(rated) else u"Unrated"
+        return context

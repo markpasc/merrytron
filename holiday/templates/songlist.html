@@ -60,11 +60,11 @@
         </td>
         <td>
             {% if song.rating == 1 %}
-                <a href="{% url good %}">★</a>
+                <a href="{% url rated rated="good" %}">★</a>
             {% elif song.rating == 2 %}
-                <a href="{% url great %}">★★</a>
+                <a href="{% url rated rated="great" %}">★★</a>
             {% elif song.rating == 3 %}
-                <a href="{% url best %}">★★★</a>
+                <a href="{% url rated rated="best" %}">★★★</a>
             {% endif %}
         </td>
         <td>
