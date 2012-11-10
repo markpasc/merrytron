@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     # everything
 
     url(r'^classic/(?P<slug>.*)$', views.ClassicView.as_view(), name='classic'),
-    # has embed
+    url(r'^playable/(?:page(?P<page>\d+))?$', views.CanPlayView.as_view(), name='can_play'),
     # free downloads
     # genre?
 
