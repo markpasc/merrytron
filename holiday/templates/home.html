@@ -1,4 +1,5 @@
 {% extends "songs.html" %}
+{% load humanize %}
 
 {% block htmltitle %}{% if page_obj and page_obj.number != 1 %}{{ title }} &bull; {% endif %}Merrytron{% endblock %}
 
@@ -9,7 +10,7 @@
     {% if not page_obj or page_obj.number == 1 %}
     <div id="foot">
         <div id="foot-inner">
-            <p><a href="/">The Merrytron</a> is an index of {{ total_count }} winter holiday songs for your seasonal enjoyment. All listed songs are worth the listed purchase price, so if you like these songs, support these artists. Prices reflect the listed price at the linked store when added to the Merrytron, so check for changes before buying.</p>
+            <p><a href="/">The Merrytron</a> is an index of {{ total_songs|intcomma }} winter holiday songs for your seasonal enjoyment. All listed songs are worth the listed purchase price, so if you like these songs, support these artists. Prices reflect the listed price at the linked store when added to the Merrytron, so check for changes before buying.</p>
 
             <ul>
                 <li><a href="{% url alpha %}">All songs</a> (by album artist)</li>

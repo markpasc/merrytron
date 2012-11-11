@@ -98,3 +98,9 @@ class Song(models.Model):
         if self.artist_id:
             return u"%s — %s" % (self.title, self.artist.name)
         return self.title
+
+
+def total_song_count_cp(request):
+    return {
+        'total_songs': lambda: Song.objects.all().count()
+    }
