@@ -4,9 +4,12 @@
 
 {% block content %}
 
-	<h2>{% if object %}{{ object }}{% else %}{{ title }}{% endif %}</h2>
+    <h2>{% if object %}{{ object }}{% else %}{{ title }}{% endif %}</h2>
 
-	{% include "songlist.html" %}
-	{% include "pager.html" %}
+    {% if page_obj and page_obj.number != 1 %}
+        {% include "pager.html" %}
+    {% endif %}
+    {% include "songlist.html" %}
+    {% include "pager.html" %}
 
 {% endblock %}
