@@ -14,7 +14,7 @@ a {
 	text-decoration: underline;
 }
 
-.song a {
+.song a, #foot a {
 	font-weight: bold;
 }
 
@@ -46,8 +46,8 @@ h1, h2, h3 {
 
 a.buy, a.play {
 	font-size: 0.8em;
-	border-radius: 10px;
-	padding: 2px 8px;
+	border-radius: 1em;
+	padding: 0.2em 0.6em 0.3em;
 	background-color: rgba(0, 0, 0, 0.5);
 	color: white;
 	text-decoration: none;
@@ -85,4 +85,16 @@ a.buy, a.play {
 	display: inline-block;
 	content: "➤";
 	padding-left: 0.5em;
+}
+
+#foot {
+	border-radius: 1em 1em 0 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+	padding: 2em 2em 1em;
+	margin: 2em 0 0;
+}
+
+#foot ul a {
+	margin-right: 1em;
 }
