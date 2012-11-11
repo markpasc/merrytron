@@ -14,22 +14,6 @@
         </h1>
 
         {% block content %}{% endblock %}
-
-        <div id="foot">
-            <p><a href="/">The Merrytron</a> is an index of {{ total_count }} winter holiday songs for your seasonal enjoyment. All listed songs are worth the listed purchase price, so if you like these songs, support these artists. Prices reflect the listed price at the linked store when added to the Merrytron, so check for changes before buying.</p>
-
-            <ul>
-                <li><a href="{% url alpha %}">All songs</a> (by album artist)</li>
-                <li><a href="{% url can_play %}">Playable streams</a></li>
-                <li><a href="{% url download %}">Free downloads</a></li>
-                <li class="rated">
-                    <a href="{% url rated rated="unrated" %}">Unrated</a>
-                    <a href="{% url rated rated="good" %}">Good ★</a>
-                    <a href="{% url rated rated="great" %}">Great ★★</a>
-                    <a href="{% url rated rated="best" %}">Best ★★★</a>
-                </li>
-            </ul>
-        </div>
     </div>
 
     {% block htmlfoot %}

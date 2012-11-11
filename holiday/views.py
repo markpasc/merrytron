@@ -19,12 +19,12 @@ class TitledListView(ListView):
         return context
 
 
-class HomeView(ListView):
+class HomeView(TitledListView):
 
     queryset = Song.objects.select_related('album').order_by('-added', 'album', 'track')
-    context_object_name = 'songs'
     paginate_by = 40
     template_name = 'home.html'
+    title = 'Recent additions'
 
 
 class ArtistView(DetailView):
