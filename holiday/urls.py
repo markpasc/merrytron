@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^album/(?P<slug>.*)$', views.AlbumView.as_view(), name='album'),
     # everything
 
+    url(r'^all/(?:page(?P<page>\d+))?$', views.AlphaView.as_view(), name='alpha'),
     url(r'^classic/(?P<slug>.*)$', views.ClassicView.as_view(), name='classic'),
     url(r'^playable/(?:page(?P<page>\d+))?$', views.CanPlayView.as_view(), name='can_play'),
     url(r'^downloads/(?:page(?P<page>\d+))?$', views.DownloadView.as_view(), name='download'),

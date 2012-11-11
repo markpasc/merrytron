@@ -59,6 +59,12 @@ class ClassicView(DetailView):
         return context
 
 
+class AlphaView(TitledListView):
+
+    queryset = Song.objects.select_related('album').order_by('album__artist__name', 'album__title', 'track')
+    title = 'All songs'
+
+
 class CanPlayView(TitledListView):
 
     title = 'Playable'
