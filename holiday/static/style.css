@@ -95,6 +95,10 @@ a.buy, a.play {
 	margin: 2em 0 0;
 }
 
-#foot ul a {
+#foot a:hover {
+	color: inherit;
+}
+
+#foot ul .rated a {
 	margin-right: 1em;
 }
