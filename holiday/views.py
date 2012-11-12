@@ -27,7 +27,6 @@ class TitledListView(ListView):
 class RecentView(TitledListView):
 
     queryset = Song.objects.select_related('album').order_by('-added', 'album', 'track')
-    template_name = 'recent.html'
     title = 'Recent additions'
 
 
