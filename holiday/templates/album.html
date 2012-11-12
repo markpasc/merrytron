@@ -4,8 +4,8 @@
 
 {% block content %}
 
-	{% with album.songs as songs %}
-		{% include "songlist.html" %}
-	{% endwith %}
+	{% for song in album.songs %}
+		{% include "song.html" %}
+	{% endfor %}
 
 {% endblock %}

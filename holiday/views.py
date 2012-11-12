@@ -1,9 +1,14 @@
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, TemplateView
 
 from holiday.models import Artist, Album, Classic, Song
+
+
+class HomeView(TemplateView):
+
+    template_name = 'home.html'
 
 
 class TitledListView(ListView):
@@ -19,11 +24,10 @@ class TitledListView(ListView):
         return context
 
 
-class HomeView(TitledListView):
+class RecentView(TitledListView):
 
     queryset = Song.objects.select_related('album').order_by('-added', 'album', 'track')
-    paginate_by = 40
-    template_name = 'home.html'
+    template_name = 'recent.html'
     title = 'Recent additions'
 
 
@@ -65,7 +69,7 @@ class AlphaView(TitledListView):
     title = 'All songs'
 
 
-class CanPlayView(TitledListView):
+class PlayableView(TitledListView):
 
     title = 'Playable'
 

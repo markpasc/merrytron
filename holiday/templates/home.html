@@ -1,30 +1,35 @@
 {% extends "songs.html" %}
-{% load humanize %}
 
 {% block htmltitle %}{% if page_obj and page_obj.number != 1 %}{{ title }} &bull; {% endif %}Merrytron{% endblock %}
 
 {% block content %}
 
-    {{ block.super }}
-
-    {% if not page_obj or page_obj.number == 1 %}
-    <div id="foot">
-        <div id="foot-inner">
-            <p><a href="/">The Merrytron</a> is an index of <strong>{{ total_songs|intcomma }}</strong> winter holiday songs for your seasonal enjoyment. All listed songs are worth the listed purchase price, so if you like these songs, support these artists. Prices reflect the listed price at the linked store when added to the Merrytron, so check for changes before buying.</p>
-
-            <ul>
-                <li><a href="{% url alpha %}">All songs</a> (by album artist)</li>
-                <li><a href="{% url can_play %}">Playable streams</a></li>
-                <li><a href="{% url download %}">Free downloads</a></li>
-                <li class="rated">
-                    <a href="{% url rated rated="unrated" %}">Unrated</a>
-                    <a href="{% url rated rated="good" %}">Good ★</a>
-                    <a href="{% url rated rated="great" %}">Great ★★</a>
-                    <a href="{% url rated rated="best" %}">Best ★★★</a>
-                </li>
-            </ul>
-        </div>
+    <div class="row">
+        <h2 class="span6">
+            <a href="{% url alpha %}"><img src="{{ STATIC_URL }}glyphish/194-note-2.png" width="23" height="23" alt=""></a>
+            <a href="{% url alpha %}">All songs</a>
+        </h2>
+        <h2 class="span6">
+            <a href="{% url recent %}"><img src="{{ STATIC_URL }}glyphish/11-clock.png" width="25" height="25" alt=""></a>
+            <a href="{% url recent %}">Recent additions</a>
+        </h2>
     </div>
-    {% endif %}
+    <div class="row">
+        <h2 class="span6">
+            <a href="{% url playable %}"><img src="{{ STATIC_URL }}glyphish/120-headphones.png" width="22" height="21" alt=""></a>
+            <a href="{% url playable %}">Playable streams</a>
+        </h2>
+        <h2 class="span6">
+            <a href="{% url download %}"><img src="{{ STATIC_URL }}glyphish/57-download.png" width="19" height="24" alt=""></a>
+            <a href="{% url download %}">Free downloads</a>
+        </h2>
+    </div>
+    <div class="row">
+        <h3 class="span2">By rating:</h3>
+        <h3 class="span2"><a href="{% url rated rated="good" %}">Good ★</a></h3>
+        <h3 class="span2"><a href="{% url rated rated="great" %}">Great ★★</a></h3>
+        <h3 class="span2"><a href="{% url rated rated="best" %}">Best ★★★</a></h3>
+        <h3 class="span2"><a href="{% url rated rated="unrated" %}">Unrated</a></h3>
+    </div>
 
 {% endblock %}

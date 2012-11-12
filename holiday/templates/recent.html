@@ -11,6 +11,10 @@
     {% endif %}
 
     {% for song in songs %}
+        {% ifchanged song.added %}
+            <h3>Added {{ song.added|date:"j M Y" }}</h3>
+        {% endifchanged %}
+
         {% include "song.html" %}
     {% endfor %}
 

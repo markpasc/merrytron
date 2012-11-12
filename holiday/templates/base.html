@@ -14,6 +14,13 @@
         </h1>
 
         {% block content %}{% endblock %}
+
+        <div id="foot" class="row">
+            <div id="foot-inner">
+                {% load humanize %}
+                <p><a href="/">The Merrytron</a> is an index of <strong>{{ total_songs|intcomma }}</strong> winter holiday songs for your seasonal enjoyment. If you like these songs, support these artists. Prices reflect the listed price at the linked store when added to the Merrytron, so check for changes before buying. The Merrytron is by <a href="http://markpasc.org/mark/">markpasc</a> &amp; friends.</p>
+            </div>
+        </div>
     </div>
 
     {% block htmlfoot %}

@@ -35,6 +35,10 @@ h1, h2 {
 	vertical-align: bottom;
 }
 
+h2 img {
+	vertical-align: baseline;
+}
+
 h1, h2, h3 {
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -88,17 +92,20 @@ a.buy, a.play {
 }
 
 #foot {
-	border-radius: 1em 1em 0 0;
+	font-size: 0.8em;
+	border-radius: 1em;
 	background-color: rgba(0, 0, 0, 0.5);
 	color: white;
-	padding: 2em 2em 1em;
+	padding: 1em;
 	margin: 2em 0 0;
+}
+
+#foot p {
+	margin: 0;
+	padding: 0;
+	line-height: 1.5em;
 }
 
 #foot a:hover {
 	color: inherit;
-}
-
-#foot ul .rated a {
-	margin-right: 1em;
 }
