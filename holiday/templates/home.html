@@ -25,6 +25,16 @@
         </h2>
     </div>
     <div class="row">
+        <h2 class="span6">
+            <a href="{% url classics %}"><img src="{{ STATIC_URL }}glyphish/66-microphone.png" width="12" height="24" alt=""></a>
+            <a href="{% url classics %}">Classics &amp; standards</a>
+        </h2>
+        <h2 class="span6">
+            <a href="{% url nontrad %}"><img src="{{ STATIC_URL }}glyphish/27-planet.png" width="29" height="18" alt=""></a>
+            <a href="{% url nontrad %}">Non-traditional</a>
+        </h2>
+    </div>
+    <div class="row">
         <h3 class="span2">By rating:</h3>
         <h3 class="span2"><a href="{% url rated rated="good" %}">Good ★</a></h3>
         <h3 class="span2"><a href="{% url rated rated="great" %}">Great ★★</a></h3>

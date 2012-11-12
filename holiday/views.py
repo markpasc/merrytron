@@ -50,6 +50,13 @@ class AlbumView(DetailView):
     template_name = 'album.html'
 
 
+class ClassicListView(ListView):
+
+    model = Classic
+    context_object_name = 'classics'
+    template_name = 'classics.html'
+
+
 class ClassicView(DetailView):
 
     model = Classic
@@ -62,6 +69,12 @@ class ClassicView(DetailView):
         return context
 
 
+class NontradView(TitledListView):
+
+    queryset = Song.objects.filter(classic=None).select_related('album').order_by('album__artist__name', 'album__title', 'track')
+    title = 'Non-traditional'
+
+
 class AlphaView(TitledListView):
 
     queryset = Song.objects.select_related('album').order_by('album__artist__name', 'album__title', 'track')
@@ -70,11 +83,8 @@ class AlphaView(TitledListView):
 
 class PlayableView(TitledListView):
 
+    queryset = Song.objects.exclude(embed='').select_related('album').order_by('album__artist__name', 'album__title', 'track')
     title = 'Playable'
-
-    def get_queryset(self):
-        qs = Song.objects.exclude(embed='')
-        return qs.select_related('album').order_by('album__artist__name', 'album__title', 'track')
 
 
 class DownloadView(TitledListView):
