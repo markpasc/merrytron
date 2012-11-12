@@ -91,6 +91,10 @@ a.buy, a.play {
 	padding-left: 0.5em;
 }
 
+#first-row {
+	margin-top: 1em;
+}
+
 #foot {
 	clear: left;
 	font-size: 1em;
