@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block htmltitle %}Classics &amp; standards • {{ block.super }}{% endblock %}
+
+{% block content %}
+
+	<h2>Classics &amp; standards</h2>
+
+	<div id="first-row" class="row">
+	{% for classic in classics %}
+		<h4 class="span3"><a href="{% url classic slug="classic.slug" %}">{{ classic.title }}</a></h4>
+	{% endfor %}
+	</div>
+
+	{% include "pager.html" %}
+
+{% endblock %}
