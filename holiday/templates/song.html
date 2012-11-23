@@ -35,7 +35,9 @@
 {% endwith %}
 
 <tr>
-    <td class="track">{{ song.track }}</td>
+    <td class="track">
+        {% if song.track %}{{ song.track }}{% endif %}
+    </td>
     <td>
         {% if song.classic_id %}
             <a href="{% url classic slug=song.classic.slug %}">{{ song.title }}</a>
