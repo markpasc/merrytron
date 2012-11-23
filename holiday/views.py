@@ -1,4 +1,4 @@
-from django.db.models import Q
+from django.db.models import Q, Max
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView, TemplateView
@@ -6,9 +6,16 @@ from django.views.generic import DetailView, ListView, TemplateView
 from holiday.models import Artist, Album, Classic, Song
 
 
-class HomeView(TemplateView):
+class HomeView(ListView):
 
+    queryset = Album.objects.exclude(artwork=None).order_by('-id')[:5]
+    context_object_name = 'albums'
     template_name = 'home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        context['latest_date'] = Song.objects.all().aggregate(Max('added'))['added__max']
+        return context
 
 
 class TitledListView(ListView):

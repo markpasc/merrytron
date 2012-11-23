@@ -5,6 +5,16 @@
 {% block content %}
 
     <div id="first-row" class="row">
+        <h3 class="span6">Latest ({{ latest_date|date:"j F" }})</h3>
+        <div class="span12">
+            {% for album in albums %}
+                {% with album.artwork as art %}
+                    <a href="{% url album slug=album.slug %}" title="{{ album.title }}"><img class="cover" src="{{ art.url }}" width="{{ art.width }}" height="{{ art.height }}" alt=""></a>
+                {% endwith %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row">
         <h2 class="span6">
             <a href="{% url alpha %}"><img src="{{ STATIC_URL }}glyphish/194-note-2.png" width="23" height="23" alt=""></a>
             <a href="{% url alpha %}">All songs</a>

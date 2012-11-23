@@ -18,10 +18,10 @@ a {
 	font-weight: bold;
 }
 
-.album img.cover {
+img.cover {
 	float: left;
 	max-width: 150px;
-	margin: 0 0 1em;
+	margin: 0 1em 1em 0;
 	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 	border-radius: 5px;
 }
