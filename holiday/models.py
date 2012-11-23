@@ -35,7 +35,7 @@ class Album(models.Model):
 
     def add_songs(self, songs, added=None):
         if added is None:
-            added = date(2010, 10, 31)
+            added = date.today()
         for song in songs:
             track, title, artistname, rating, classicname = song
 
