@@ -17,7 +17,8 @@ urlpatterns = patterns('',
     url(r'^classics/(?:page(?P<page>\d+))?$', views.ClassicListView.as_view(), name='classics'),
     url(r'^classic/(?P<slug>.*)$', views.ClassicView.as_view(), name='classic'),
     url(r'^nontrad/(?:page(?P<page>\d+))?$', views.NontradView.as_view(), name='nontrad'),
-
     url(r'^rated/(?P<rated>unrated|good|great|best)/(?:page(?P<page>\d+))?$',
         views.RatedView.as_view(), name='rated'),
+
+    url(r'^error$', views.ErrorPageView.as_view(), name='error'),
 )

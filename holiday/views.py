@@ -125,3 +125,8 @@ class RatedView(ListView):
         rated = self.kwargs['rated']
         context['title'] = u"Rated %s" % rated if self.RATINGS.index(rated) else u"Unrated"
         return context
+
+
+class ErrorPageView(TemplateView):
+
+    template_name = '500.html'
