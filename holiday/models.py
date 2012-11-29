@@ -3,15 +3,24 @@
 from datetime import date
 
 from django.db import models
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
 from django.template.defaultfilters import slugify
 
 
 class Artist(models.Model):
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(unique=True)
+    num_songs = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.name
+
+    @classmethod
+    def bulk_update_num_songs(cls):
+        artist_data = cls.objects.all().annotate(song_count=models.Count('song')).values('id', 'song_count')
+        for artist in artist_data:
+            cls.objects.filter(id=artist['id']).update(num_songs=artist['song_count'])
 
     class Meta:
         ordering = ('name',)
@@ -98,6 +107,18 @@ class Song(models.Model):
         if self.artist_id:
             return u"%s — %s" % (self.title, self.artist.name)
         return self.title
+
+
+@receiver(post_save, sender=Song)
+@receiver(post_delete, sender=Song)
+def update_song_artist_num_songs(sender, **kwargs):
+    if kwargs.get('raw'):
+        return
+    artist = kwargs['instance'].artist
+    num_songs = artist.song_set.count()
+    if artist.num_songs != num_songs:
+        artist.num_songs = num_songs
+        artist.save()
 
 
 def total_song_count_cp(request):

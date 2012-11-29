@@ -15,7 +15,15 @@
             <div class="album-title">
                 <h3>
                     <a href="{% url album slug=album.slug %}">{{ album.title }}</a>
-                    {% if album.artist %} — <a href="{% url artist slug=album.artist.slug %}">{{ album.artist.name }}</a>{% endif %}
+                    {% if album.artist %}
+                         —
+                         {% if album.artist.num_songs > 1 %}
+                            <a href="{% url artist slug=album.artist.slug %}">{{ album.artist.name }}</a>
+                        {% else %}
+                            {{ album.artist.name }}
+                        {% endif %}
+                    {% endif %}
+
                     {% if album.buy_link %}
                         <a class="buy" href="{{ album.buy_link }}">
                             {% if album.price %}
@@ -56,7 +64,11 @@
     </td>
     <td>
         {% if song.artist != song.album.artist %}
-            <a href="{% url artist slug=song.artist.slug %}">{{ song.artist.name }}</a>
+            {% if song.artist.num_songs > 1 %}
+                <a href="{% url artist slug=song.artist.slug %}">{{ song.artist.name }}</a>
+            {% else %}
+                {{ song.artist.name }}
+            {% endif %}
         {% endif %}
     </td>
     <td>
