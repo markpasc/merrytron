@@ -46,7 +46,7 @@ class ArtistView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ArtistView, self).get_context_data(**kwargs)
         query = Q(artist__slug=self.object.slug) | Q(album__artist__slug=self.object.slug)
-        context['songs'] = Song.objects.filter(query).order_by('-added', 'album', 'track')
+        context['songs'] = Song.objects.filter(query).select_related('album').order_by('album__title', 'track')
         return context
 
 
