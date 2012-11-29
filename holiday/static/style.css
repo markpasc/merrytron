@@ -66,6 +66,10 @@ a.buy, a.play {
 	border-spacing: 0.5em 0;
 }
 
+.song table td {
+    vertical-align: top;
+}
+
 .song table td.track {
 	text-align: right;
 }
