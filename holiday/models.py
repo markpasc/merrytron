@@ -88,7 +88,7 @@ class Song(models.Model):
     classic = models.ForeignKey(Classic, null=True, blank=True)
     rating = models.PositiveSmallIntegerField(blank=True, default=0)
     genre = models.CharField(max_length=20, blank=True)
-    added = models.DateField()
+    added = models.DateField(default=date.today)
     notes = models.TextField(blank=True)
     embed = models.TextField(blank=True)
     buy_link = models.URLField(blank=True)
