@@ -9,6 +9,7 @@ class ArtistAdmin(admin.ModelAdmin):
         'slug': ('name',),
     }
     search_fields = ('name',)
+    readonly_fields = ('num_songs',)
 
 admin.site.register(Artist, ArtistAdmin)
 
@@ -43,6 +44,7 @@ admin.site.register(Classic, ClassicAdmin)
 
 class SongAdmin(admin.ModelAdmin):
     list_display = ('title', 'artist', 'track', 'album_name', 'rating', 'added', 'has_embed')
+    list_editable = ('rating',)
     fields = ('title', 'classic', 'artist', 'album', 'track', 'rating', 'added', 'buy_link', 'price', 'embed')
     search_fields = ('title', 'artist__name', 'album__title', 'classic__title')
     list_filter = ('rating', 'added')
