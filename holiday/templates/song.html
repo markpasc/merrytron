@@ -8,17 +8,17 @@
         <div class="album">
             {% with album.artwork as art %}
                 {% if art %}
-                <a href="{% url album slug=album.slug %}"><img class="cover" src="{{ art.url }}" width="{{ art.width }}" height="{{ art.height }}" alt=""></a>
+                <a href="{% url 'album' slug=album.slug %}"><img class="cover" src="{{ art.url }}" width="{{ art.width }}" height="{{ art.height }}" alt=""></a>
                 {% endif %}
             {% endwith %}
 
             <div class="album-title">
                 <h3>
-                    <a href="{% url album slug=album.slug %}">{{ album.title }}</a>
+                    <a href="{% url 'album' slug=album.slug %}">{{ album.title }}</a>
                     {% if album.artist %}
                          —
                          {% if album.artist.num_songs > 1 %}
-                            <a href="{% url artist slug=album.artist.slug %}">{{ album.artist.name }}</a>
+                            <a href="{% url 'artist' slug=album.artist.slug %}">{{ album.artist.name }}</a>
                         {% else %}
                             {{ album.artist.name }}
                         {% endif %}
@@ -48,7 +48,7 @@
     </td>
     <td>
         {% if song.classic_id %}
-            <a href="{% url classic slug=song.classic.slug %}">{{ song.title }}</a>
+            <a href="{% url 'classic' slug=song.classic.slug %}">{{ song.title }}</a>
         {% else %}
             {{ song.title }}
         {% endif %}
@@ -65,7 +65,7 @@
     <td>
         {% if song.artist != song.album.artist %}
             {% if song.artist.num_songs > 1 %}
-                <a href="{% url artist slug=song.artist.slug %}">{{ song.artist.name }}</a>
+                <a href="{% url 'artist' slug=song.artist.slug %}">{{ song.artist.name }}</a>
             {% else %}
                 {{ song.artist.name }}
             {% endif %}
@@ -73,11 +73,11 @@
     </td>
     <td>
         {% if song.rating == 1 %}
-            <a href="{% url rated rated="good" %}">★</a>
+            <a href="{% url 'rated' rated="good" %}">★</a>
         {% elif song.rating == 2 %}
-            <a href="{% url rated rated="great" %}">★★</a>
+            <a href="{% url 'rated' rated="great" %}">★★</a>
         {% elif song.rating == 3 %}
-            <a href="{% url rated rated="best" %}">★★★</a>
+            <a href="{% url 'rated' rated="best" %}">★★★</a>
         {% endif %}
     </td>
     <td>

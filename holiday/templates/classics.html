@@ -8,7 +8,7 @@
 
 	<div id="first-row" class="row">
 	{% for classic in classics %}
-		<h4 class="span3"{% cycle ' style="clear:left"' '' '' '' %}><a href="{% url classic slug=classic.slug %}">{{ classic.title }}</a></h4>
+		<h4 class="span3"{% cycle ' style="clear:left"' '' '' '' %}><a href="{% url 'classic' slug=classic.slug %}">{{ classic.title }}</a></h4>
 	{% endfor %}
 	</div>
 
