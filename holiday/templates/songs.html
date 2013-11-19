@@ -4,7 +4,33 @@
 
 {% block content %}
 
-    <h2>{% if object %}{{ object }}{% else %}{{ title }}{% endif %}</h2>
+    <h2>
+        {% if classic %}
+            “{{ classic }}”
+        {% elif object %}
+            {{ object }}
+        {% else %}
+            {% if title == 'Non-traditional' %}
+                <span class="glyphicon glyphicon-leaf"></span>
+            {% elif title == 'Recently added' %}
+                <span class="glyphicon glyphicon-time"></span>
+            {% elif title == 'All songs' %}
+                <span class="glyphicon glyphicon-music"></span>
+            {% elif title == 'Playable streams' %}
+                <span class="glyphicon glyphicon-headphones"></span>
+            {% elif title == 'Free downloads' %}
+                <span class="glyphicon glyphicon-download-alt"></span>
+            {% endif %}
+            {{ title }}
+            {% if title == 'Rated good' %}
+                ★
+            {% elif title == 'Rated great' %}
+                ★★
+            {% elif title == 'Rated best' %}
+                ★★★
+            {% endif %}
+        {% endif %}
+    </h2>
 
     {% if page_obj and page_obj.number != 1 %}
         {% include "pager.html" %}

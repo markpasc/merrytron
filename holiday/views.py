@@ -34,7 +34,7 @@ class TitledListView(ListView):
 class RecentView(TitledListView):
 
     queryset = Song.objects.select_related('album').order_by('-added', 'album', 'track')
-    title = 'Recent additions'
+    title = 'Recently added'
 
 
 class ArtistView(DetailView):
@@ -91,7 +91,7 @@ class AlphaView(TitledListView):
 class PlayableView(TitledListView):
 
     queryset = Song.objects.exclude(embed='').select_related('album').order_by('album__artist__name', 'album__title', 'track')
-    title = 'Playable'
+    title = 'Playable streams'
 
 
 class DownloadView(TitledListView):
