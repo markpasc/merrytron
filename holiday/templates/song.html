@@ -54,11 +54,13 @@
         {% endif %}
 
         {% if song.embed %}
-            <a class="play" href="#play-song-{{ song.id }}" role="button" data-toggle="modal">Play</a>
-            <div id="play-song-{{ song.id }}" class="modal hide fade">
-                {% autoescape off %}
-                {{ song.embed }}
-                {% endautoescape %}
+            <a class="play" href="#" data-target="#play-song-{{ song.id }}" role="button" data-toggle="modal">Play</a>
+            <div id="play-song-{{ song.id }}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    {% autoescape off %}
+                    {{ song.embed }}
+                    {% endautoescape %}
+                </div>
             </div>
         {% endif %}
     </td>
