@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from django.db.models import Q, Max
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -125,7 +127,7 @@ class RatedView(ListView):
     def get_context_data(self, **kwargs):
         context = super(RatedView, self).get_context_data(**kwargs)
         rated = self.kwargs['rated']
-        context['title'] = u"Rated %s" % rated if self.RATINGS.index(rated) else u"Unrated"
+        context['title'] = "Rated %s" % rated if self.RATINGS.index(rated) else "Unrated"
         return context
 
 

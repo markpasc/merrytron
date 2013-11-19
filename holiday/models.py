@@ -1,4 +1,5 @@
 # coding=utf-8
+from __future__ import unicode_literals
 
 from datetime import date
 
@@ -36,7 +37,7 @@ class Album(models.Model):
 
     def __unicode__(self):
         if self.artist_id:
-            return u"%s — %s" % (self.title, self.artist.name)
+            return "%s — %s" % (self.title, self.artist.name)
         return self.title
 
     def songs(self):
@@ -105,7 +106,7 @@ class Song(models.Model):
 
     def __unicode__(self):
         if self.artist_id:
-            return u"%s — %s" % (self.title, self.artist.name)
+            return "%s — %s" % (self.title, self.artist.name)
         return self.title
 
 
