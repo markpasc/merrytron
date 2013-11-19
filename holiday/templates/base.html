@@ -9,17 +9,46 @@
     {% endblock %}
 </head><body>
 
-    <div class="container">
-        <h1>
-            <a href="/"><img src="{{ STATIC_URL }}merrytron.png" width="453" height="57" alt="Merrytron ❄ ❆ ❄"></a>
-        </h1>
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img style="margin: -10px 0 -7px 0" src="{{ STATIC_URL }}merrytron.png" width="200"></a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'alpha' %}"><span class="glyphicon glyphicon-music"></span> All songs</a></li>
+                <li><a href="{% url 'recent' %}"><span class="glyphicon glyphicon-time"></span> Recent</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">By type <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'playable' %}"><span class="glyphicon glyphicon-headphones"></span> Playable streams</a></li>
+                        <li><a href="{% url 'download' %}"><span class="glyphicon glyphicon-download-alt"></span> Free downloads</a></li>
+                        <li><a href="{% url 'classics' %}"><span class="glyphicon glyphicon-gift"></span> Classics &amp; standards</a></li>
+                        <li><a href="{% url 'nontrad' %}"><span class="glyphicon glyphicon-leaf"></span> Non-traditional</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">By rating <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'rated' rated='good' %}">Good ★</a></li>
+                        <li><a href="{% url 'rated' rated='great' %}">Good ★★</a></li>
+                        <li><a href="{% url 'rated' rated='best' %}">Good ★★★</a></li>
+                        <li><a href="{% url 'rated' rated='unrated' %}">Unrated</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+
+    <div id="content" class="container">
 
         {% block content %}{% endblock %}
 
         <div id="foot" class="row">
             <div id="foot-inner">
                 {% load humanize %}
-                <p><a href="/">The Merrytron</a> is an index of <strong>{{ total_songs|intcomma }}</strong> winter holiday songs for your seasonal enjoyment. If you like these songs, support these artists. Prices reflect the listed price at the linked store when added to the Merrytron, so check for changes before buying. Icons by <a href="http://glyphish.com/">Glyphish</a>. The Merrytron is by <a href="http://markpasc.org/mark/">markpasc</a> &amp; friends.</p>
+                <p><a href="/">The Merrytron</a> is an index of <strong>{{ total_songs|intcomma }}</strong> winter holiday songs for your seasonal enjoyment. If you like these songs, support these artists. Prices reflect the listed price at the linked store when added to the Merrytron, so check for changes before buying. The Merrytron is by <a href="http://markpasc.org/mark/">markpasc</a> &amp; friends.</p>
             </div>
         </div>
     </div>

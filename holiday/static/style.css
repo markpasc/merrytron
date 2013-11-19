@@ -1,6 +1,33 @@
 body {
+    background: url(white_wall_hash.png) white;
+    color: black;
+}
+
+nav.navbar {
     background: url(gingham.png) #93CA56;
     color: black;
+}
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
+    background-color: transparent;
+    background-image: linear-gradient(to bottom,rgba(235, 235, 235, 0.6) 0,rgba(243, 243, 243, 0.6) 100%);
+}
+.navbar-default .navbar-nav>li>a {
+    color: #333;
+    font-weight: bold;
+}
+.navbar-default .navbar-nav>.dropdown>a .caret {
+    border-top-color: #333;
+    border-bottom-color: #333;
+}
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus {
+    color: black;
+}
+.navbar-default .navbar-nav>.dropdown>a:hover .caret,
+.navbar-default .navbar-nav>.dropdown>a:focus .caret {
+    border-top-color: black;
+    border-bottom-color: black;
 }
 
 .album {
@@ -9,7 +36,7 @@ body {
     padding: 0;
 }
 
-a {
+#content a {
     color: inherit;
     text-decoration: underline;
 }
@@ -19,7 +46,8 @@ a {
 }
 
 img.cover {
-    max-width: 150px;
+    max-width: 200px;
+    height: auto;
     margin: 0 1em 1em 0;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
@@ -29,8 +57,8 @@ img.cover {
     float: left;
 }
 
-h1 {
-    margin: 0.5em 0.5em 0 0;
+h2 {
+    margin: 0;
 }
 
 h1, h2 {
@@ -47,15 +75,15 @@ h1, h2, h3 {
 }
 
 .album-title, .song {
-    margin-left: 150px;
+    margin-left: 200px;
     padding-left: 1em;
 }
 
-a.buy, a.play {
+#content a.buy, #content a.play {
     font-size: 0.8em;
     border-radius: 1em;
     padding: 0.2em 0.6em 0.3em;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #5cb85c;
     color: white;
     text-decoration: none;
     white-space: nowrap;
