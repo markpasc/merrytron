@@ -5,47 +5,37 @@
 {% block content %}
 
     <div id="first-row" class="row">
-        <h3 class="span6">Latest ({{ latest_date|date:"j F" }})</h3>
-        <div id="latest-albums" class="span12">
-            {% for album in albums %}
-                {% with album.artwork as art %}
-                    <a href="{% url 'album' slug=album.slug %}" title="{{ album.title }}"><img class="cover" src="{{ art.url }}" width="{{ art.width }}" height="{{ art.height }}" alt=""></a>
-                {% endwith %}
-            {% endfor %}
-        </div>
+        <h2 class="col-md-12">Latest ({{ latest_date|date:"j F" }})</h3>
+        {% for album in albums %}
+            {% with album.artwork as art %}
+                <a class="col-md-3" href="{% url 'album' slug=album.slug %}" title="{{ album.title }}"><img class="cover" src="{{ art.url }}" width="{{ art.width }}" height="{{ art.height }}" alt=""></a>
+            {% endwith %}
+        {% endfor %}
     </div>
+
     <div class="row">
-        <h2 class="category span6">
-            <a href="{% url 'alpha' %}"><span class="glyphicon glyphicon-music"></span></a>
-            <a href="{% url 'alpha' %}">All songs</a>
+        <h2 class="category col-md-3">
+            <a href="{% url 'alpha' %}"><span class="glyphicon glyphicon-music"></span> All songs</a>
         </h2>
-        <h2 class="category span6">
-            <a href="{% url 'recent' %}"><span class="glyphicon glyphicon-time"></span></a>
-            <a href="{% url 'recent' %}">Recent additions</a>
+        <h2 class="category col-md-3">
+            <a href="{% url 'recent' %}"><span class="glyphicon glyphicon-time"></span> Recent additions</a>
         </h2>
-    </div>
-    <div class="row">
-        <h2 class="category span6">
-            <a href="{% url 'playable' %}"><span class="glyphicon glyphicon-headphones"></span></a>
-            <a href="{% url 'playable' %}">Playable streams</a>
+        <h2 class="category col-md-3">
+            <a href="{% url 'playable' %}"><span class="glyphicon glyphicon-headphones"></span> Playable streams</a>
         </h2>
-        <h2 class="category span6">
-            <a href="{% url 'download' %}"><span class="glyphicon glyphicon-download-alt"></span></a>
-            <a href="{% url 'download' %}">Free downloads</a>
+        <h2 class="category col-md-3">
+            <a href="{% url 'download' %}"><span class="glyphicon glyphicon-download-alt"></span> Free downloads</a>
         </h2>
-    </div>
-    <div class="row">
-        <h2 class="category span6">
-            <a href="{% url 'classics' %}"><span class="glyphicon glyphicon-gift"></span></a>
-            <a href="{% url 'classics' %}">Classics &amp; standards</a>
+        <h2 class="category col-md-6">
+            <a href="{% url 'classics' %}"><span class="glyphicon glyphicon-gift"></span> Classics &amp; standards</a>
         </h2>
-        <h2 class="category span6">
-            <a href="{% url 'nontrad' %}"><span class="glyphicon glyphicon-leaf"></span></a>
-            <a href="{% url 'nontrad' %}">Non-traditional</a>
+        <h2 class="category col-md-6">
+            <a href="{% url 'nontrad' %}"><span class="glyphicon glyphicon-leaf"></span> Non-traditional</a>
         </h2>
     </div>
+
     <div class="row">
-        <h3 class="category rating-category span12">
+        <h3 class="category rating-category col-md-12">
             By rating:
             <a href="{% url 'rated' rated="good" %}">Good ★</a>
             <a href="{% url 'rated' rated="great" %}">Great ★★</a>
