@@ -1,13 +1,17 @@
 {% if page_obj %}
-	<div id="pages">
-		{% if page_obj.has_previous %}
-			<a class="left" href="page{{ page_obj.previous_page_number }}"><span>Back</span></a>
-			{% if page_obj.has_next %}
-				&bull;
-			{% endif %}
-		{% endif %}
-		{% if page_obj.has_next %}
-			<a class="right" href="page{{ page_obj.next_page_number }}"><span>More</span></a>
-		{% endif %}
-	</div>
+    <div id="pages">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li><a class="left" href="page{{ page_obj.previous_page_number }}"><span>Back</span></a></li>
+            {% endif %}
+            {% for page_num in paginator.page_range %}
+                <li {% if page_num == page_obj.number %}class="active"{% endif %}>
+                    <a href="page{{ page_num }}">{{ page_num }}</a>
+                </li>
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li><a class="right" href="page{{ page_obj.next_page_number }}"><span>More</span></a></li>
+            {% endif %}
+        </ul>
+    </div>
 {% endif %}
