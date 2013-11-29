@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from datetime import date
 
-from django.db import models
+from django.db import models, connection
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.template.defaultfilters import slugify
@@ -120,6 +120,25 @@ def update_song_artist_num_songs(sender, **kwargs):
     if artist.num_songs != num_songs:
         artist.num_songs = num_songs
         artist.save()
+
+
+@receiver(post_save, sender=Song)
+def update_search_content(sender, **kwargs):
+    song = kwargs['instance']
+    artist_name = song.artist.name if song.artist_id else ''
+    album_title = song.album.title if song.album_id else ''
+    classic_title = song.classic.title if song.classic_id else ''
+
+    cursor = connection.cursor()
+    cursor.execute("""
+        UPDATE holiday_song
+           SET search_content = setweight(to_tsvector('english', title), 'A')
+            || setweight(to_tsvector('english', %s), 'B')
+            || setweight(to_tsvector('english', %s), 'B')
+            || setweight(to_tsvector('english', buy_link), 'D')
+            || setweight(to_tsvector('english', %s), 'D')
+         WHERE id = %s
+    """, [artist_name, album_title, classic_title, song.id])
 
 
 def total_song_count_cp(request):

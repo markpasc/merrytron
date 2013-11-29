@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^recent/(?:page(?P<page>\d+))?$', views.RecentView.as_view(), name='recent'),
     url(r'^artist/(?P<slug>.*)$', views.ArtistView.as_view(), name='artist'),
     url(r'^album/(?P<slug>.*)$', views.AlbumView.as_view(), name='album'),
+    url(r'^search$', views.SearchView.as_view(), name='search'),
 
     url(r'^all/(?:page(?P<page>\d+))?$', views.AlphaView.as_view(), name='alpha'),
     url(r'^playable/(?:page(?P<page>\d+))?$', views.PlayableView.as_view(), name='playable'),

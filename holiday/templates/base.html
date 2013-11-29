@@ -36,6 +36,11 @@
                         <li><a href="{% url 'rated' rated='unrated' %}">Unrated</a></li>
                     </ul>
                 </li>
+                <li role="search">
+                    <form method="get" action="{% url 'search' %}">
+                        <input type="text" name="q" class="form-control" placeholder="Search">
+                    </form>
+                </li>
             </ul>
         </div>
         </div>

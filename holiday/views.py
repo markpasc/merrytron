@@ -131,6 +131,26 @@ class RatedView(ListView):
         return context
 
 
+class SearchView(TitledListView):
+
+    context_object_name = 'songs'
+    template_name = 'songs.html'
+    paginate_by = None
+
+    def get_queryset(self):
+        self.query = self.request.GET.get('q')
+        return Song.objects.raw("""
+            SELECT *
+              FROM holiday_song
+             WHERE search_content @@ plainto_tsquery('english', %s)
+        """, [self.query])
+
+    def get_context_data(self, **kwargs):
+        context = super(SearchView, self).get_context_data(**kwargs)
+        context['title'] = "Search for “{}”".format(self.query)
+        return context
+
+
 class ErrorPageView(TemplateView):
 
     template_name = '500.html'

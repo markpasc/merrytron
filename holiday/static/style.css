@@ -16,6 +16,9 @@ nav.navbar {
     color: #333;
     font-weight: bold;
 }
+.navbar-default .navbar-nav>li>form {
+    padding: 7px 15px;
+}
 .navbar-default .navbar-nav>.dropdown>a .caret {
     border-top-color: #333;
     border-bottom-color: #333;
