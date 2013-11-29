@@ -9,7 +9,7 @@ from holiday.models import Song, Album
 
 class Command(NoArgsCommand):
 
-    help = "Checks all songs' embed codes & links for bad content"
+    help = "Checks all songs' buy links for bad content"
 
     option_list = NoArgsCommand.option_list + (
         make_option('--debug',
@@ -32,6 +32,7 @@ class Command(NoArgsCommand):
 
         for obj in buyable():
             buy_link = obj.buy_link
+
             if buy_link in checked_links:
                 if debug:
                     self.stdout.write('Already checked buy link for {} #{} "{}" by {}'.format(
