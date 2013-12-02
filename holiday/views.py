@@ -10,7 +10,7 @@ from holiday.models import Artist, Album, Classic, Song
 
 class HomeView(ListView):
 
-    queryset = Album.objects.exclude(artwork='').order_by('-id')[:4]
+    queryset = Album.objects.exclude(artwork='').order_by('-id')[:8]
     context_object_name = 'albums'
     template_name = 'home.html'
 
