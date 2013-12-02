@@ -37,7 +37,7 @@ class TitledListView(ListView):
 
 class RecentView(TitledListView):
 
-    queryset = Song.objects.filter(added__gte=date(year=2013, month=1, day=1)).select_related('album').order_by('-added', 'album', 'track')
+    queryset = Song.objects.filter(added__gte=date(year=2013, month=1, day=1)).select_related('album').order_by('-added', 'album__artist__name', 'album__title', 'track')
     title = 'Recently added'
 
 
@@ -142,9 +142,10 @@ class SearchView(TitledListView):
     def get_queryset(self):
         self.query = self.request.GET.get('q')
         return Song.objects.raw("""
-            SELECT *
-              FROM holiday_song
-             WHERE search_content @@ plainto_tsquery('english', %s)
+            SELECT *, ts_rank_cd(search_content, query) AS rank
+              FROM holiday_song, plainto_tsquery('english', %s) AS query
+             WHERE search_content @@ query
+          ORDER BY rank DESC
         """, [self.query])
 
     def get_context_data(self, **kwargs):
