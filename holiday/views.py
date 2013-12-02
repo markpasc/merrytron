@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 
+from datetime import date
+
 from django.db.models import Q, Max
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -35,7 +37,7 @@ class TitledListView(ListView):
 
 class RecentView(TitledListView):
 
-    queryset = Song.objects.select_related('album').order_by('-added', 'album', 'track')
+    queryset = Song.objects.filter(added__gte=date(year=2013, month=1, day=1)).select_related('album').order_by('-added', 'album', 'track')
     title = 'Recently added'
 
 
