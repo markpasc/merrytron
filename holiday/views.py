@@ -145,7 +145,7 @@ class SearchView(TitledListView):
             SELECT *, ts_rank_cd(search_content, query) AS rank
               FROM holiday_song, plainto_tsquery('english', %s) AS query
              WHERE search_content @@ query
-          ORDER BY rank DESC
+          ORDER BY rank DESC, coalesce(album_id, 0), coalesce(track, 0)
         """, [self.query])
 
     def get_context_data(self, **kwargs):
