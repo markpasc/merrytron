@@ -1,5 +1,5 @@
 {% with song.album as album %}
-    {% ifchanged album.id %}
+    {% if show_album %}
 
         {% if not forloop.first %}
             </table></div>
@@ -39,7 +39,7 @@
 
         <div class="song"><table>
 
-    {% endifchanged %}
+    {% endif %}
 {% endwith %}
 
 <tr>

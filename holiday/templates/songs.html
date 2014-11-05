@@ -37,7 +37,11 @@
     {% endif %}
 
     {% for song in songs %}
-        {% include "song.html" %}
+        {% ifchanged song.album.id %}
+            {% include "song.html" with show_album="yes" %}
+        {% else %}
+            {% include "song.html" %}
+        {% endifchanged %}
     {% endfor %}
 
     {% include "pager.html" %}

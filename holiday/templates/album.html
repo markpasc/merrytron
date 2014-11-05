@@ -5,7 +5,11 @@
 {% block content %}
 
 	{% for song in album.songs %}
-		{% include "song.html" %}
+		{% if forloop.first %}
+			{% include "song.html" with show_album="yes" %}
+		{% else %}
+			{% include "song.html" %}
+		{% endif %}
 	{% endfor %}
 
 {% endblock %}
