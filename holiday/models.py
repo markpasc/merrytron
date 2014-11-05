@@ -15,7 +15,7 @@ class Artist(models.Model):
     slug = models.SlugField(unique=True)
     num_songs = models.IntegerField(default=0)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     @classmethod
@@ -36,7 +36,7 @@ class Album(models.Model):
     buy_link = models.URLField(blank=True)
     price = models.CharField(max_length=10, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         if self.artist_id:
             return "%s – %s" % (self.title, self.artist.name)
         return self.title
@@ -79,7 +79,7 @@ class Classic(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def merge_from(self, other):
@@ -105,7 +105,7 @@ class Song(models.Model):
     buy_link = models.URLField(blank=True)
     price = models.CharField(max_length=10, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         if self.artist_id:
             return "%s – %s" % (self.title, self.artist.name)
         return self.title
