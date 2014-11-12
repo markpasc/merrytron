@@ -5,7 +5,7 @@
 {% block content %}
 
     <div id="first-row" class="row">
-        <h2 class="col-md-12">Latest ({{ latest_date|date:"j F" }})</h3>
+        <h2 class="col-md-12">Latest ({{ latest_date|date:"j F Y" }})</h3>
     </div>
     <div class="row">
         {% for album in albums %}
