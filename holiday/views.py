@@ -37,7 +37,7 @@ class TitledListView(ListView):
 
 class RecentView(TitledListView):
 
-    queryset = Song.objects.filter(added__gte=date(year=2013, month=1, day=1)).select_related('album').order_by('-added', 'album__artist__name', 'album__title', 'track')
+    queryset = Song.objects.filter(added__gte=date(year=2014, month=1, day=1)).select_related('album').order_by('-added', 'album__artist__name', 'album__title', 'track')
     title = 'Recently added'
 
 
