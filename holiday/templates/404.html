@@ -8,12 +8,24 @@
     <style type="text/css">
         html { height: 100%; }
 
+        @-webkit-keyframes spinner {
+            from { -webkit-transform: rotate(-20deg); }
+            to   { -webkit-transform: rotate(1100deg); }
+        }
+        @keyframes spinner {
+            from { transform: rotate(-20deg); }
+            to   { transform: rotate(1100deg); }
+        }
+
         #spin {
             margin: 0 auto;
             height: 300px;
             font-size: 250px;
             line-height: 400px;
             text-align: center;
+
+            -webkit-animation: spinner 5.0s ease-in-out infinite alternate;
+            animation: spinner 5.0s ease-in-out infinite alternate;
         }
     </style>
 
@@ -27,27 +39,6 @@
 
         <div id="spin">🎄</div>
     </div>
-
-    <script type="text/javascript">
-        function settitate(obj, key, value) {
-            obj['-webkit-' + key] = value;
-            obj['-moz-' + key] = value;
-            obj['-o-' + key] = value;
-            obj[key] = value;
-        }
-        function derp() {
-            var $spin = document.getElementById('spin');
-
-            settitate($spin.style, 'transition', 'all 0.0s linear');
-            settitate($spin.style, 'transform', 'rotate(0deg)');
-            setTimeout(function () {
-                settitate($spin.style, 'transition', 'all 10.0s linear');
-                settitate($spin.style, 'transform', 'rotate(360deg)');
-            }, 10);
-        }
-        setInterval(derp, 10000);
-        derp();
-    </script>
 
     <script type="text/javascript">
       var _gauges = _gauges || [];
