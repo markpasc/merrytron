@@ -111,8 +111,8 @@ class Command(NoArgsCommand):
             )
             if not self.is_various:
                 artist_name = album_data['artist']
-                artist, created = Artist.objects.get_or_create(name=artist_name,
-                    defaults={'slug': slugify(artist_name)})
+                artist, created = Artist.objects.get_or_create(slug=slugify(artist_name),
+                    defaults={'name': artist_name})
                 album.artist = artist
 
             album.save()
