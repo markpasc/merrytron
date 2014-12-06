@@ -53,7 +53,7 @@ class Album(models.Model):
             if artistname is None:
                 artist = self.artist
             else:
-                artist, _ = Artist.objects.get_or_create(slug=slugify(artistname),
+                artist, _ = Artist.objects.get_or_create(slug=slugify(artistname)[:50],
                     defaults={'name': artistname})
 
             classic = None
@@ -61,7 +61,7 @@ class Album(models.Model):
                 if classicname is True:
                     classicname = title
                 classic, _ = Classic.objects.get_or_create(title=classicname,
-                    defaults={'slug': slugify(classicname)})
+                    defaults={'slug': slugify(classicname)[:50]})
 
             obj = Song(title=title, album=self, artist=artist, track=track, added=added,
                 rating=rating or 0, classic=classic)
